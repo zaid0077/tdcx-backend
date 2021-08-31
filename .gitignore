@@ -1,0 +1,9 @@
+.serverless
+/.history
+/node_modules
+package-lock.json
+.env
+yarn.lock
+/modules
+.env
+.vscode
