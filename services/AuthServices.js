@@ -31,5 +31,11 @@ module.exports = {
         returnObj.email = user.email
 
         return returnObj
+    },
+
+    findUser: async function(payload) {
+        return await UserDao.findUserForAuthentication(payload._id)
     }
+
+
 }

@@ -5,9 +5,7 @@ module.exports = {
     setupTokenForJwt: async function (user) {
         let userForJwt = {
             '_id': user._id,
-            'userId': user.userId,
             'email': user.email,
-            'lastLogin': user.lastLogin
         }
 
         return jwt.sign(userForJwt, settings.secret, {

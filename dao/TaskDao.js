@@ -2,15 +2,15 @@ const Tasks = require('../models/Task')
 const mongoose = require('mongoose')
 
 module.exports = {
-    getTasks: async function(params) {
+    getTasks: async function(id) {
         return await Tasks.find({
-            userId: new mongoose.Types.ObjectId('612b0efd86c11b1dd0ff5c91')
+            userId: new mongoose.Types.ObjectId(id)
         })
     },
 
-    getTaskCount: async function(params, data) {
+    getTaskCount: async function(id, params, data) {
         let searchObj = {}
-        searchObj.userId = new mongoose.Types.ObjectId('612b0efd86c11b1dd0ff5c91')
+        searchObj.userId = new mongoose.Types.ObjectId(id)
         if (data.type == "complete") {
             searchObj.completed = true 
         }
@@ -28,5 +28,21 @@ module.exports = {
 
     saveTask: async function(params) {
         return await Tasks.create(params)
+    },
+
+    changeTaskStatus: async function(params) {
+        return await Tasks.update({
+         _id: new mongoose.Types.ObjectId(params.id)
+        }, {
+          $set: {
+            completed: params.toUpdate
+          }
+        })
+    },
+
+    updateTask: async function(params) {
+        return await Tasks.findOneAndUpdate({
+            _id: new mongoose.Types.ObjectId(params._id)
+        }, params)
     }
 }
