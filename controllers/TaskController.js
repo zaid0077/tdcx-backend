@@ -4,9 +4,7 @@ const TaskService = require('../services/TaskServices')
 module.exports = {
     getTasks: async function (req, res) {
         try {
-            console.log(JSON.stringify(req.user))
             let tasks = await TaskService.getTasks(req.user);
-            console.log(tasks)
             res.status(200).send({ tasks })
         } catch (e) {
             return res.status(500).send({ error: true, message: e.message })
