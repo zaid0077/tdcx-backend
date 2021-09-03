@@ -5,7 +5,7 @@ root = process.cwd();
 
 
 router.use('/auth', require('./AuthRoute').router);
-router.use('/task', require('./taskRoute').router);
+router.use('/task', require('./TaskRoute').router);
 
 
 router.use(compileSass({
