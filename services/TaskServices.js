@@ -22,16 +22,20 @@ module.exports = {
         return await TaskDao.deleteTask(params)
     },
 
-    async saveTask(params) {
-        return await TaskDao.saveTask(params)
+    async saveTask(user, params) {
+        let data = {
+            userId: user[0]._id,
+            name: params.name
+        }
+        return await TaskDao.saveTask(data)
     },
 
-    async getDashboardData(params) {
-        let taskList = await TaskDao.getTasks()
+    async getDashboardData(user) {
+        let taskList = await TaskDao.getTasks(user[0]._id)
 
-        let totalTasks = await TaskDao.getTaskCount(params, { type: 'all' })
-        let completedTasks = await TaskDao.getTaskCount(params, { type: 'complete' })
-        let inCompletedTasks = await TaskDao.getTaskCount(params, { type: 'incomplete' })
+        let totalTasks = await TaskDao.getTaskCount(user[0]._id, { type: 'all' })
+        let completedTasks = await TaskDao.getTaskCount(user[0]._id, { type: 'complete' })
+        let inCompletedTasks = await TaskDao.getTaskCount(user[0]._id, { type: 'incomplete' })
 
         return {
             taskList: taskList,

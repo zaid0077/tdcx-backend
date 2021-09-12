@@ -8,7 +8,7 @@ module.exports = {
         })
     },
 
-    getTaskCount: async function(id, params, data) {
+    getTaskCount: async function(id, data) {
         let searchObj = {}
         searchObj.userId = new mongoose.Types.ObjectId(id)
         if (data.type == "complete") {

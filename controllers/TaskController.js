@@ -31,7 +31,7 @@ module.exports = {
 
     saveTask: async function (req, res) {
         try {
-            await TaskService.saveTask(req.body);
+            await TaskService.saveTask(req.user, req.body);
             res.status(200).send({ message: "Successfully saved task" })
         } catch (e) {
             return res.status(500).send({ error: true, message: e.message })
@@ -40,7 +40,7 @@ module.exports = {
 
     getDashboardData: async function (req, res) {
         try {
-            let dashboardData = await TaskService.getDashboardData()
+            let dashboardData = await TaskService.getDashboardData(req.user)
             res.status(200).send({ dashboardData })
         } catch (error) {
             return res.status(500).send({ error: true, message: error.message })
